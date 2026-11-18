@@ -505,7 +505,7 @@ html[data-theme]:not([data-theme="default"]) .wv path{fill:var(--bg)!important}
 @media(prefers-reduced-motion:reduce){.mb-walker-track,.mb-wfig,.mb-axe-arm,.mb-spark-g,.mb-shelf-morph,.mb-boy-cheer{animation:none!important}.mb-walker-track{left:50%;transform:translateX(-50%)}}
 </style>
 
-<script src="/_aistudio-iframe.js?v=1f94f900"></script></head><body>
+<script src="/_aistudio-iframe.js?v=29045eb3"></script></head><body>
 <div id="app"></div><div id="modal"></div><div id="ask"></div>
 <script>
 const SB='https://jfofcnevprdoehxqjjth.supabase.co',KEY='sb_publishable_p648PWrE3ZIU1q4OrV2veg_wORfGrX-';
@@ -529,7 +529,7 @@ const SUBS={'সাহিত্য ও সৃজনশীল লেখা':['উ
 const subOpts=(cat,cur)=>`<option value="">— উপবিভাগ বেছে নিন —</option>${(SUBS[cat]||[]).map(x=>`<option ${x===cur?'selected':''}>${x}</option>`).join('')}`;
 const catF=b=>{const c=S.cat;const ok=c==='সব'||(c==='ফ্রি বই'?b.mode==='free':c==='তরুণ পাঠকের পছন্দ'?b.audience==='teen':c==='ইসলামিক বই'?(b.category===c||b.muslim):b.category===c);return ok&&(!S.subc||b.subcategory===S.subc)};
 const L=[{k:'series',i:'📚',n:'সিরিজ লাইব্রেরি',f:b=>b.series},{k:'pdf',i:'📄',n:'পিডিএফ লাইব্রেরি',f:b=>b.type==='pdf'||b.type==='ebook'},{k:'mag',i:'📰',n:'ম্যাগাজিন লাইব্রেরি',f:b=>b.type==='mag'},{k:'muslim',i:'🕌',n:'মুসলিম লাইব্রেরি',f:b=>b.muslim},{k:'pop',i:'🔥',n:'জনপ্রিয় বই লাইব্রেরি',f:b=>b.is_popular},{k:'hard',i:'👑',n:'প্রিমিয়াম হার্ডকাভার লাইব্রেরি',f:b=>b.type==='hard'},{k:'world',i:'🌍',n:'বিশ্ব লাইব্রেরি',f:b=>true}];
-const PG=[{k:'home',i:'🏠',n:'হোম'},{k:'all',i:'🛒',n:'সব বই'},...L,{k:'quotes',i:'💬',n:'নিজের ছবি দিয়ে উক্তি'},{k:'authors',i:'🧑‍🎓',n:'লেখকদের পরিচিতি'},{k:'ancient',i:'🏛',n:'প্রাচীন লেখকদের অবদান'},{k:'exchange',i:'🔁',n:'বিনিময়'},{k:'emerging',i:'🌱',n:'আমাদের নবীন লেখকরা'},{k:'community',i:'📝',n:'ব্লগ কমিউনিটি'},{k:'founder',i:'👑',n:'প্রতিষ্ঠাতা পরিচিতি'},{k:'studio',i:'🖋',n:'লেখক স্টুডিও'},{k:'write',i:'✍️',n:'নিজের লেখা পাঠাও'},{k:'mw',i:'📝',n:'ম্যাগাজিনে লেখা পাঠাও'}];
+const PG=[{k:'home',i:'🏠',n:'হোম'},{k:'all',i:'🛒',n:'সব বই'},...L,{k:'quotes',i:'💬',n:'নিজের ছবি দিয়ে উক্তি'},{k:'authors',i:'🧑‍🎓',n:'লেখকদের পরিচিতি'},{k:'ancient',i:'🏛',n:'প্রাচীন লেখকদের অবদান'},{k:'exchange',i:'🔁',n:'বিনিময়'},{k:'jointbooks',i:'📖',n:'যৌথ বই'},{k:'emerging',i:'🌱',n:'আমাদের নবীন লেখকরা'},{k:'community',i:'📝',n:'ব্লগ কমিউনিটি'},{k:'founder',i:'👑',n:'প্রতিষ্ঠাতা পরিচিতি'},{k:'studio',i:'🖋',n:'লেখক স্টুডিও'},{k:'write',i:'✍️',n:'নিজের লেখা পাঠাও'},{k:'mw',i:'📝',n:'ম্যাগাজিনে লেখা পাঠাও'}];
 let S={lang:(function(){try{return localStorage.getItem('mb_lang')}catch(e){return null}})()||'bn',subc:'',zone:'in',co:null,coupon:null,cart:{},wish:new Set(),owned:new Set(),pend:0,am:'email',rev:[],sub:'সব',books:[],authors:[],set:{},user:null,prof:null,admin:false,view:'home',sort:'new',cat:'সব',q:'',tab:'dash',atab:'login'};
 const eff=b=>b.sale_price>0&&b.sale_price<b.price?b.sale_price:b.price;
 const priceH=b=>b.mode==='free'?'ফ্রি পড়ুন':(eff(b)<b.price?`৳ ${bn(eff(b))} <s>৳ ${bn(b.price)}</s>`:'৳ '+bn(b.price));
@@ -1087,7 +1087,10 @@ async function body(){
  if(v==='quotes')return quotesH();
  if(v==='authors')return `<div class="wrap"><span class="eyebrow dk">OUR AUTHORS</span><h2>লেখকদের পরিচিতি</h2><div class="chips"><button class="chip on" data-a="go:authors">সব লেখক</button><button class="chip" data-a="go:emerging">আমাদের নবীন লেখকরা</button></div><div class="au2">${fpub()?`<button class="ac" data-a="go:founder">${S.fp.photo_url?`<img class="av" src="${esc(S.fp.photo_url)}" alt="">`:'<div class="av"></div>'}<b>${esc(S.fp.name||'প্রতিষ্ঠাতা')}</b><small>${esc(FDs())}<br>${esc(FDe())}</small></button>`:''}${LA().map(a=>`<button class="ac" data-a="author:${a.id}">${a.photo_url?`<img class="av" src="${esc(a.photo_url)}" alt="">`:'<div class="av"></div>'}<b>${esc(a.name)}${vTick(a)}</b><small>${bn(S.books.filter(b=>byA(b,a)).length)}টি বই • ${bn(authMeta(a).followers||0)} অনুসারী</small></button>`).join('')||'<p class="mu">শীঘ্রই লেখকদের পরিচিতি যুক্ত হবে।</p>'}</div></div>`;
  if(v==='auth')return authPageH();
- if(v==='account'){if(!S.user){S.view='auth';return body()}
+ if(v==='jointbooks')return await jointBooksListH();
+  if(v==='jointdetail')return await jointBookDetailH(S._jointId);
+  if(v==='jointwrite')return await jointChapterWriteH(S._jointId, S._jointChIdx);
+  if(v==='account){if(!S.user){S.view='auth';return body()}
   const [o,d,sm]=await Promise.all([sb.from('orders').select('*, books(title,cover_url,cover_thumb,type), order_items(book_id,qty,price,books(title,cover_url,cover_thumb,type))').order('created_at',{ascending:false}),sb.from('downloads').select('created_at, books(title,cover_url)').order('created_at',{ascending:false}).limit(50),sb.from('submissions').select('*').order('created_at',{ascending:false})]);
   const p=S.prof||{},T=S.acct||'';return `<div class="wrap"><div class="gl" style="display:flex;gap:14px;align-items:center">${p.avatar_url?`<img class="av" style="margin:0" src="${esc(p.avatar_url)}">`:'<div class="av" style="margin:0"></div>'}<div style="flex:1;min-width:0"><h2 style="margin:0">${esc(p.full_name||'আমার অ্যাকাউন্ট')}</h2><small class="mu">${esc(S.user.email)}</small></div>${(S.isFounder||S.admin)?'<button class="btn sm go" data-a="go:fdash">প্রতিষ্ঠাতা ড্যাশবোর্ড</button> ':''}<button class="btn sm gh" data-a="logout">লগআউট</button></div>
   ${T===''?accGrid(o.data||[],d.data||[]):`<button class="btn sm gh" data-a="acct:" style="margin:12px 0 4px">← ড্যাশবোর্ডে ফিরুন</button>`}
@@ -1105,7 +1108,7 @@ async function body(){
  if(v==='world'&&S.sub!=='সব')list=list.filter(b=>b.audience===S.sub);if(v==='pop'&&S.sub!=='সব')list=list.filter(b=>S.sub==='translated'?b.lang_kind==='translated':S.sub==='english'?b.lang_kind==='english':b.category===S.sub);list=sorted(list.filter(b=>(b.title+(b.author||'')+(b.translator||'')).includes(S.q)));
  return `<div class="wrap"><h2>${lib?lib.i+' '+lib.n:'🛒 সব বই'}</h2><input id="q" placeholder="🔍 বই বা লেখকের নাম খুঁজুন…" value="${esc(S.q)}">${lib?'':`<div class="chips">${['সব','ফ্রি বই','তরুণ পাঠকের পছন্দ',...CATS].map(c=>`<button class="chip ${c===S.cat?'on':''}" data-a="cat:${esc(c)}">${esc(c)}</button>`).join('')}</div>${SUBS[S.cat]?`<div class="chips">${[['','সব উপবিভাগ'],...SUBS[S.cat].map(x=>[x,x])].map(([k,n])=>`<button class="chip ${(S.subc||'')===k?'on':''}" data-a="subc:${esc(k)}">${esc(n)}</button>`).join('')}</div>`:''}`}${v==='world'?`<div class="chips">${[['সব','সব'],...Object.entries(AUD)].map(([k,n])=>`<button class="chip ${S.sub===k?'on':''}" data-a="sub:${k}">${n}</button>`).join('')}</div>`:''}${v==='pop'?`<div class="chips">${[['সব','সব'],['translated','📘 অনুবাদ বই'],['english','🇬🇧 ইংরেজি অনুবাদ'],...CATS.map(c=>[c,c])].map(([k,n])=>`<button class="chip ${S.sub===k?'on':''}" data-a="sub:${esc(k)}">${esc(n)}</button>`).join('')}</div>`:''}${v==='all'?`<div class="mb-pubtabs">${[['all','সব প্রকাশনা'],['ep','📖 পর্বভিত্তিক ই-বুক'],['pdf','📄 PDF বই লাইব্রেরি'],['hard','👑 হার্ডকাভার ও ম্যাগাজিন']].map(([k,n])=>`<button class="mb-pubtab ${(S._pubf||'all')===k?'on':''}" data-a="pubflt:${k}">${n}</button>`).join('')}</div>`:''}${sortBar()}${gridH(list,v)}</div>`}
 async function adminBody(){
- const T=[['dash','📊 ড্যাশবোর্ড'],['blog','📝 ব্লগ মডারেশন'],['wr','🌱 নবীন লেখক'],['anc','🏛 প্রাচীন লাইব্রেরি'],['xchg','🔁 বিনিময়'],['lng','🌐 ভাষা ও অনুবাদ'],['promo','🎯 প্রমোশন'],['vid','🎬 ভিডিও'],['dls','⬇️ ডাউনলোড'],['bookqueue','📚 বই ও পর্ব অনুমোদন'],['notif','🔔 নোটিফিকেশন'],['payouts','💸 পেআউট'],['prod','📦 প্রোডাক্ট'],['ord','🧾 অর্ডার'],['auth','🧑‍🎓 লেখক'],['subs','✍️ লেখা'],['ai','🔍 আসল না নকল'],['cp','🏷 কুপন'],['tm','💬 সংগৃহীত রিভিউ'],['trend','🌍 বিশ্ব ট্রেন্ড'],['pg','📄 পেজ'],['icons','🖼 আইকন'],['set','⚙ সেটিংস']];let h=`<div class="wrap"><h2>⚙ অ্যাডমিন প্যানেল</h2><div class="chips">${T.map(([k,n])=>`<button class="chip ${S.tab===k?'on':''}" data-a="tab:${k}">${n}</button>`).join('')}</div>`;
+ const T=[['dash','📊 ড্যাশবোর্ড'],['blog','📝 ব্লগ মডারেশন'],['wr','🌱 নবীন লেখক'],['anc','🏛 প্রাচীন লাইব্রেরি'],['xchg','🔁 বিনিময়'],['lng','🌐 ভাষা ও অনুবাদ'],['promo','🎯 প্রমোশন'],['vid','🎬 ভিডিও'],['dls','⬇️ ডাউনলোড'],['bookqueue','📚 বই ও পর্ব অনুমোদন'],['notif','🔔 নোটিফিকেশন'],['payouts','💸 পেআউট'],['prod','📦 প্রোডাক্ট'],['ord','🧾 অর্ডার'],['auth','🧑‍🎓 লেখক'],['subs','✍️ লেখা'],['ai','🔍 আসল না নকল'],['cp','🏷 কুপন'],['tm','💬 সংগৃহীত রিভিউ'],['trend','🌍 বিশ্ব ট্রেন্ড'],['pg','📄 পেজ'],['icons','🖼 আইকন'],['joint','📚 যৌথ বই আহ্বান'],['set','⚙ সেটিংস']];let h=`<div class="wrap"><h2>⚙ অ্যাডমিন প্যানেল</h2><div class="chips">${T.map(([k,n])=>`<button class="chip ${S.tab===k?'on':''}" data-a="tab:${k}">${n}</button>`).join('')}</div>`;
  if(S.tab==='prod')h+=`<button class="btn go w" data-a="newb">➕ নতুন প্রোডাক্ট</button><div class="gl">${S.books.map(b=>`<div class="row">${b.cover_url?`<img src="${esc(b.cover_url)}">`:'<div class="th"></div>'}<div><b>${esc(b.title)}</b><br><small>${b.mode==='draft'?'🚫 ড্রাফট':b.mode==='free'?'ফ্রি':'৳ '+bn(eff(b))} • ${TY[b.type]||''}</small></div><button class="btn sm gh" data-a="pubtypetog:${b.id}" title="PDF/ই-বুক বদলান">${pubType(b)==='episode'?'📖':'📄'}</button><button class="btn sm gh" data-a="admep:${b.id}" title="পর্ব যোগ ও পরিদর্শন">📑</button><button class="btn sm gh" data-a="editb:${b.id}">✏️</button><button class="btn sm gh" data-a="delb:${b.id}">🗑</button></div>`).join('')}</div>`;
  if(S.tab==='bookqueue')h+=await adminBookQueueH();
  if(S.tab==='notif')h+=await adminNotifH();
@@ -1167,7 +1170,8 @@ async function adminBody(){
  if(S.tab==='ai'){const sm=(await sb.from('submissions').select('id,title,body').not('body','is',null).order('created_at',{ascending:false})).data||[];S._ai=Object.fromEntries(sm.map(x=>[x.id,x.body]));
  h+=`<div class="gl"><h3 style="margin:0">মামার আসল না নকল</h3><p class="mu" style="margin:4px 0 10px">লেখা বসিয়ে যাচাই করুন, লেখাটি মানুষের না এআই-এর মতো এবং কেন, তা দেখাবে। লেখা শুধু আপনার ফোনেই বিশ্লেষণ হয়, কোথাও পাঠানো হয় না।</p><div class="f"><label>জমা পড়া লেখা থেকে বেছে নিন (ঐচ্ছিক)</label><select id="aisel"><option value="">— বেছে নিন —</option>${sm.map(x=>`<option value="${x.id}">${esc(x.title)}</option>`).join('')}</select><label>অথবা এখানে লেখা পেস্ট করুন</label><textarea id="ait" rows="9" placeholder="যাচাই করতে চান এমন লেখা এখানে বসান…"></textarea></div><button class="btn go w" data-a="aicheck">যাচাই করুন</button></div><div id="aires"></div>`}
  if(S.tab==='icons')h+=`<div class="gl"><p class="mu" style="margin:0 0 8px">প্রতিটি আইকনের ওপরের ছবি এখান থেকে বদলাতে পারবেন।</p>${PG.filter(p=>!['home','all'].includes(p.k)).map(p=>`<div class="row"><span style="width:46px;height:46px;border-radius:50%;overflow:hidden;display:grid;place-items:center;background:#eef2fb;font-size:1.4rem;flex:none">${S.set['icon_'+p.k]?`<img src="${esc(S.set['icon_'+p.k])}" style="width:100%;height:100%;object-fit:cover">`:p.i}</span><div><b>${p.n}</b><br><input type="file" accept="image/*" data-icon="${p.k}"></div>${S.set['icon_'+p.k]?`<button class="btn sm gh" data-a="delicon:${p.k}">মুছুন</button>`:''}</div>`).join('')}</div>`;
- if(S.tab==='set')h+=`<div class="gl"><div class="f"><label>বিকাশ নম্বর</label><input id="s1" value="${esc(S.set.bkash)}"><label>নগদ নম্বর</label><input id="s2" value="${esc(S.set.nagad)}"><label>হোয়াটসঅ্যাপ নম্বর (৮৮০...)</label><input id="s3" value="${esc(S.set.whatsapp)}"><label>হিরো ব্যানার ছবি (নতুন আপলোড; না দিলে ডিফল্ট হিরো দেখাবে)</label><input id="s4" type="file" accept="image/*">${S.set.banner_url?`<img src="${esc(S.set.banner_url)}" alt="" style="width:100%;border-radius:10px;margin-top:6px"><button class="btn sm rd" data-a="delbanner" style="margin-top:6px">ব্যানার সরান</button>`:''}<label>ঢাকার ভিতর ডেলিভারি (৳)</label><input id="s5" type="number" value="${esc(S.set.delivery_dhaka||70)}"><label>ঢাকার বাহিরে ডেলিভারি (৳)</label><input id="s6" type="number" value="${esc(S.set.delivery_outside||90)}"><p class="mu" style="font-size:.88rem">🎬 ভিডিও যোগ, বদল বা মোছা এখন আলাদা "ভিডিও" ট্যাবে।</p></div><label>রকেট নম্বর (Rocket)</label><input id="s_rk" value="${esc(getExt().extSet.rocket||'')}"><label>লেখকের রয়্যালটি হার (%)</label><input id="s_ry" type="number" min="0" max="100" value="${esc(getExt().extSet.royalty_pct||70)}"><label>📢 সাইট নোটিশ ব্যানার (হোমের ওপরে দেখাবে, বন্ধ করতে ফাঁকা রাখুন)</label><input id="s_nb" value="${esc(getExt().extSet.notice_banner||'')}"><label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="s_wk" style="width:auto" ${getExt().extSet.old_man_anim!==false?'checked':''}> 🚶 বইয়ের বস্তা কাঁধে হাঁটা অ্যানিমেশন চালু রাখুন</label></div><button class="btn ok w" data-a="saveset">💾 সেভ করুন</button></div>`;
+ if(S.tab==='joint')h+=await adminJointBooksH();
+  if(S.tab==='set')h+=`<div class="gl"><div class="f"><label>বিকাশ নম্বর</label><input id="s1" value="${esc(S.set.bkash)}"><label>নগদ নম্বর</label><input id="s2" value="${esc(S.set.nagad)}"><label>হোয়াটসঅ্যাপ নম্বর (৮৮০...)</label><input id="s3" value="${esc(S.set.whatsapp)}"><label>হিরো ব্যানার ছবি (নতুন আপলোড; না দিলে ডিফল্ট হিরো দেখাবে)</label><input id="s4" type="file" accept="image/*">${S.set.banner_url?`<img src="${esc(S.set.banner_url)}" alt="" style="width:100%;border-radius:10px;margin-top:6px"><button class="btn sm rd" data-a="delbanner" style="margin-top:6px">ব্যানার সরান</button>`:''}<label>ঢাকার ভিতর ডেলিভারি (৳)</label><input id="s5" type="number" value="${esc(S.set.delivery_dhaka||70)}"><label>ঢাকার বাহিরে ডেলিভারি (৳)</label><input id="s6" type="number" value="${esc(S.set.delivery_outside||90)}"><p class="mu" style="font-size:.88rem">🎬 ভিডিও যোগ, বদল বা মোছা এখন আলাদা "ভিডিও" ট্যাবে।</p></div><label>রকেট নম্বর (Rocket)</label><input id="s_rk" value="${esc(getExt().extSet.rocket||'')}"><label>লেখকের রয়্যালটি হার (%)</label><input id="s_ry" type="number" min="0" max="100" value="${esc(getExt().extSet.royalty_pct||70)}"><label>📢 সাইট নোটিশ ব্যানার (হোমের ওপরে দেখাবে, বন্ধ করতে ফাঁকা রাখুন)</label><input id="s_nb" value="${esc(getExt().extSet.notice_banner||'')}"><label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="s_wk" style="width:auto" ${getExt().extSet.old_man_anim!==false?'checked':''}> 🚶 বইয়ের বস্তা কাঁধে হাঁটা অ্যানিমেশন চালু রাখুন</label></div><button class="btn ok w" data-a="saveset">💾 সেভ করুন</button></div>`;
  return h+'</div>'}
 async function render(){
  document.body.classList.toggle('anc',S.view==='ancient');if(S.view==='ancient'){$('#app').innerHTML=await ancientPage();return}
@@ -1197,6 +1201,98 @@ async function bookForm(id){const b=S.books.find(x=>x.id===id)||{mode:'sale',typ
  <button class="btn ok w" data-a="saveb:${id||''}">সেভ করুন</button><p></p><button class="btn gh w" data-a="close">বাতিল</button>`)}
 async function authForm(id){const a=S.authors.find(x=>x.id===id)||{};modal(`<h3>${id?'✏️ লেখক এডিট':'➕ নতুন লেখক'}</h3><div class="f"><label>নাম *</label><input id="a1" value="${esc(a.name)}"><label>পরিচিতি</label><textarea id="a2" rows="4">${esc(a.bio)}</textarea><label>লেখকের আইডি/লিংক (প্রতি লাইনে একটি)</label><textarea id="a5" rows="3" placeholder="https://facebook.com/...">${esc(a.links)}</textarea><label>🌐 লেখকের ভাষা</label><select id="a6">${LANGS().map(l=>`<option value="${l.code}" ${(a.lang||'bn')===l.code?'selected':''}>${esc(l.native)} — ${esc(l.bn)}</option>`).join('')}</select><label>ছবি</label><input id="a3" type="file" accept="image/*"><label>ক্রম (ছোট সংখ্যা আগে)</label><input id="a4" type="number" value="${a.sort||0}"></div><button class="btn ok w" data-a="savea:${id||''}">সেভ করুন</button>`)}
 const A={
+,
+ // Joint Books Actions
+ jb_new(){jointFormModal()},
+ jb_edit(id){
+  getJointExt().then(ex=>{
+   const b=(ex.jointBooks||[]).find(x=>x.id===id);
+   if(b)jointFormModal(b);
+  });
+ },
+ async jb_tog(id){
+  const ex=await getJointExt();
+  const b=(ex.jointBooks||[]).find(x=>x.id===id);
+  if(b){b.active=!b.active;await saveJointExt(ex);toast(b.active?'প্রকাশিত হয়েছে':'বন্ধ করা হয়েছে');render();}
+ },
+ async jb_pubread(id){
+  const ex=await getJointExt();
+  const b=(ex.jointBooks||[]).find(x=>x.id===id);
+  if(b){b.public_read=!b.public_read;await saveJointExt(ex);toast(b.public_read?'সবার জন্য পড়া চালু হয়েছে':'গোপন রাখা হয়েছে');render();}
+ },
+ async jb_del(id){
+  if(!await ask('যৌথ বইয়ের আহ্বান মুছে ফেলবেন?'))return;
+  const ex=await getJointExt();
+  ex.jointBooks=(ex.jointBooks||[]).filter(x=>x.id!==id);
+  await saveJointExt(ex);
+  toast('মুছে ফেলা হয়েছে');render();
+ },
+ async jb_subs(id){
+  S._jointSubsId=id;
+  modal(await adminJointSubsModal(id));
+ },
+ jb_detail(id){S._jointId=id;S.view='jointdetail';render();scrollTo(0,0);},
+ jb_apply_modal(id){applyJointModal(id);},
+ async jb_apply_submit(id){
+  const name=V('#jpa_name'),phone=V('#jpa_phone'),bio=V('#jpa_bio'),genre=V('#jpa_genre');
+  if(!name||!phone||!bio)return toast('নাম, ফোন ও পরিচিতি দিন');
+  const ex=await getJointExt();
+  ex.jointApps=ex.jointApps||[];
+  ex.jointApps.push({id:'app_'+Date.now(),book_id:id,user_id:S.user.id,author_name:name,info:{phone,bio,genre},status:'pending',created_at:new Date().toISOString()});
+  await saveJointExt(ex);
+  modal('');toast('আবেদন জমা হয়েছে! অ্যাডমিনের অনুমোদনের অপেক্ষা করুন।');render();
+ },
+ jb_write(p){
+  const [bookId, chIdx]=p.split(':');
+  S._jointId=bookId;S._jointChIdx=+chIdx;
+  S.view='jointwrite';render();scrollTo(0,0);
+ },
+ async jb_save_draft(p){
+  const [bookId, chIdx]=p.split(':');
+  const body=V('#jch_body');
+  const ex=await getJointExt();
+  ex.jointChapters=ex.jointChapters||[];
+  let uc=ex.jointChapters.find(x=>x.book_id===bookId&&x.user_id===S.user.id&&x.chapter_idx===+chIdx);
+  if(uc){uc.body=body;uc.status='draft';uc.updated_at=new Date().toISOString();}
+  else{ex.jointChapters.push({id:'jch_'+Date.now(),book_id:bookId,user_id:S.user.id,chapter_idx:+chIdx,body,status:'draft',updated_at:new Date().toISOString()});}
+  await saveJointExt(ex);
+  toast('💾 খসড়া সংরক্ষিত হয়েছে');
+ },
+ async jb_submit_ch(p){
+  const [bookId, chIdx]=p.split(':');
+  const body=V('#jch_body');
+  if(!body.trim())return toast('লেখা খালি রাখা যাবে না');
+  const ex=await getJointExt();
+  ex.jointChapters=ex.jointChapters||[];
+  let uc=ex.jointChapters.find(x=>x.book_id===bookId&&x.user_id===S.user.id&&x.chapter_idx===+chIdx);
+  if(uc){uc.body=body;uc.status='submitted';uc.updated_at=new Date().toISOString();}
+  else{ex.jointChapters.push({id:'jch_'+Date.now(),book_id:bookId,user_id:S.user.id,chapter_idx:+chIdx,body,status:'submitted',updated_at:new Date().toISOString()});}
+  await saveJointExt(ex);
+  toast('📥 লেখা সফলভাবে জমা দেওয়া হয়েছে!');
+  S.view='jointdetail';S._jointId=bookId;render();scrollTo(0,0);
+ },
+ async jb_save(id){
+  const title=V('#jb_t'),en_title=V('#jb_et'),cover=V('#jb_cov'),intro=V('#jb_int');
+  const total_ch=+(V('#jb_tch')||5),max_chars=+(V('#jb_mc')||4000);
+  const theme=V('#jb_th'),genre=V('#jb_gn'),deadline=V('#jb_dl'),rules=V('#jb_rules');
+  const chRaw=V('#jb_chlist');
+  if(!title||!intro)return toast('নাম ও পরিচিতি দিন');
+  const chapters=chRaw.split('\n').filter(Boolean).map(line=>{
+   const parts=line.split(':');
+   return {name:(parts[0]||'অধ্যায়').trim(), note:(parts.slice(1).join(':')||'').trim()};
+  });
+  const ex=await getJointExt();
+  ex.jointBooks=ex.jointBooks||[];
+  if(id){
+   const b=ex.jointBooks.find(x=>x.id===id);
+   if(b){Object.assign(b,{title,en_title,cover,intro,total_ch,max_chars,theme,genre,deadline,rules,chapters});}
+  }else{
+   ex.jointBooks.unshift({id:'jb_'+Date.now(),title,en_title,cover,intro,total_ch,max_chars,theme,genre,deadline,rules,chapters,active:true,public_read:false,created_at:new Date().toISOString()});
+  }
+  await saveJointExt(ex);
+  modal('');toast('যৌথ বইয়ের আহ্বান সংরক্ষণ করা হয়েছে!');render();
+ }
+
  go(v){S._loginSuccessAnim=false;S.view=v;try{history.replaceState(null,'',['founder','community','emerging'].includes(v)?'#'+v:location.pathname+location.search)}catch(e){}S.q='';S.cat='সব';S.sub='সব';render();scrollTo(0,0)},sort(s){S.sort=s;render()},cat(c){S.cat=c;S.subc='';render()},subc(k){S.subc=k;render()},
  col(k){S.q='';S.subc='';S.sub='সব';if(k==='new'){S.view='all';S.cat='সব';S.sort='new'}else if(k==='pop'){S.view='all';S.cat='সব';S.sort='pop'}else if(k==='free'){S.view='all';S.cat='ফ্রি বই'}else if(k==='teen'){S.view='all';S.cat='তরুণ পাঠকের পছন্দ'}else if(k==='islam'){S.view='all';S.cat='ইসলামিক বই'}else if(k==='ep'){S.view='all';S.cat='সব';S._pubf='episode'}else if(k==='pdf'){S.view='all';S.cat='সব';S._pubf='pdf'}render();scrollTo(0,0)},
  topic(n){S.view='all';S.cat=n;S.subc='';S.q='';S.sub='সব';render();scrollTo(0,0)},
@@ -2672,6 +2768,117 @@ A.ord=async function(p){
   }
  }catch(e){}
 };
+
+// ===== BORNIKA JOINT BOOKS (যৌথ বই আহ্বান ব্যবস্থা) =====
+async function getJointExt(){
+ const ex=getExt();
+ ex.jointBooks=ex.jointBooks||[];
+ ex.jointApps=ex.jointApps||[];
+ ex.jointChapters=ex.jointChapters||[];
+ return ex;
+}
+async function saveJointExt(ex){
+ await saveExtKey('bornika_joint_books', ex.jointBooks);
+ await saveExtKey('bornika_joint_apps', ex.jointApps);
+ await saveExtKey('bornika_joint_chapters', ex.jointChapters);
+}
+
+async function adminJointBooksH(){
+ const ex=await getJointExt();
+ const books=ex.jointBooks;
+ let h='<div class="gl"><h3>📚 যৌথ বই আহ্বান ব্যবস্থাপনা</h3><p class="mu" style="font-size:.85rem">অ্যাডমিন এখান থেকে যৌথ বইয়ের আহ্বান তৈরি ও পরিচালনা করতে পারবেন। অংশগ্রহণকারীদের লেখা গোপন থাকবে যতক্ষণ না পাবলিক রিডিং চালু করা হয়।</p><button class="btn go w" data-a="jb_new">➕ নতুন যৌথ বইয়ের আহ্বান তৈরি করুন</button></div>';
+ h+='<div class="gl"><h4>সক্রিয় ও প্রকাশিত আহ্বানসমূহ ('+bn(books.length)+')</h4>';
+ h+=books.map(b=>'<div class="row" style="align-items:flex-start"><div style="flex:1"><img src="'+esc(b.cover||LOGO)+'" style="width:50px;height:70px;object-fit:cover;border-radius:6px;float:left;margin-right:10px"><b>'+esc(b.title)+'</b> '+(b.en_title?'('+esc(b.en_title)+')':'')+'<br><small class="mu">অধ্যায়: '+bn(b.total_ch)+'টি • শেষ তারিখ: '+esc(b.deadline||'নেই')+' • স্ট্যাটাস: <b>'+(b.active?'প্রকাশিত':'বন্ধ')+'</b> • পাবলিক পড়া: <b>'+(b.public_read?'চালু':'গোপন')+'</b></small><div class="acts" style="margin-top:6px"><button class="btn sm go" data-a="jb_edit:'+b.id+'">✏️ সম্পাদনা</button><button class="btn sm '+(b.active?'rd':'ok')+'" data-a="jb_tog:'+b.id+'">'+(b.active?'বন্ধ করুন':'প্রকাশ করুন')+'</button><button class="btn sm '+(b.public_read?'rd':'ok')+'" data-a="jb_pubread:'+b.id+'">'+(b.public_read?'পাবলিক পড়া লুকান':'সবাইকে লেখা দেখান')+'</button><button class="btn sm rd" data-a="jb_del:'+b.id+'">মুছুন</button></div></div></div>').join('')+'<p class="mu">কোনো যৌথ বইয়ের আহ্বান নেই।</p>';
+ h+='</div>';
+ return h;
+}
+
+function jointFormModal(b){
+ b=b||{total_ch:5,max_chars:4000,active:true};
+ modal('<h3>'+(b.id?'যৌথ বই সম্পাদনা':'নতুন যৌথ বইয়ের আহ্বান')+'</h3>' +
+ '<div class="f">' +
+ '<label>বইয়ের বাংলা নাম *</label><input id="jb_t" value="'+esc(b.title||'')+'">' +
+ '<label>ইংরেজি নাম (ঐচ্ছিক)</label><input id="jb_et" value="'+esc(b.en_title||'')+'">' +
+ '<label>প্রচ্ছদ ছবির লিংক বা আপলোড</label><input id="jb_cov" value="'+esc(b.cover||'')+'">' +
+ '<label>বইয়ের পরিচিতি ও উদ্দেশ্য *</label><textarea id="jb_int" rows="3">'+esc(b.intro||'')+'</textarea>' +
+ '<div class="r2"><div class="f"><label>মোট অধ্যায় সংখ্যা *</label><input id="jb_tch" type="number" min="1" max="50" value="'+(b.total_ch||5)+'"></div><div class="f"><label>প্রতি অধ্যায়ে সর্বোচ্চ অক্ষর *</label><input id="jb_mc" type="number" min="500" max="20000" value="'+(b.max_chars||4000)+'"></div></div>' +
+ '<div class="r2"><div class="f"><label>বিষয় বা থিম</label><input id="jb_th" value="'+esc(b.theme||'')+'"></div><div class="f"><label>সাহিত্যধারা</label><input id="jb_gn" value="'+esc(b.genre||'')+'"></div></div>' +
+ '<label>অংশগ্রহণের শেষ তারিখ</label><input id="jb_dl" type="date" value="'+esc(b.deadline||'')+'">' +
+ '<label>লেখার অন্যান্য শর্তাবলি ও নিয়মাবলি</label><textarea id="jb_rules" rows="3">'+esc(b.rules||'')+'</textarea>' +
+ '<label>অধ্যায়ের নাম ও সংক্ষিপ্ত নির্দেশনা (প্রতি লাইনে একটি অধ্যায়)</label><textarea id="jb_chlist" rows="5">'+esc(b.chapters?b.chapters.map(c=>c.name+(c.note?': '+c.note:'')).join('\n'):'অধ্যায় ১: সূচনা\nঅধ্যায় ২: বিকাশ\nঅধ্যায় ৩: ক্লাইম্যাক্স\nঅধ্যায় ৪: পরিণতি')+'</textarea>' +
+ '</div><button class="btn ok w" data-a="jb_save:'+(b.id||'')+'">💾 সংরক্ষণ করুন</button><p></p><button class="btn gh w" data-a="close">বাতিল</button>');
+}
+
+async function jointBooksListH(){
+ const ex=await getJointExt();
+ const books=(ex.jointBooks||[]).filter(b=>b.active);
+ const apps=ex.jointApps||[];
+ const uid=S.user?S.user.id:null;
+ const myApps=new Set(apps.filter(a=>a.user_id===uid&&a.status==='approved').map(a=>a.book_id));
+ const myPend=new Set(apps.filter(a=>a.user_id===uid&&a.status==='pending').map(a=>a.book_id));
+
+ let h='<div class="wrap"><button class="btn sm gh" data-a="go:home">← হোম</button><h2 style="margin-top:12px">📚 যৌথ বই আহ্বান</h2><p class="mu">অনুমোদিত লেখকেরা এখান থেকে যৌথ বইয়ের আহ্বানে অংশগ্রহণ করতে এবং অধ্যায়ভিত্তিক লেখা জমা দিতে পারবেন।</p><div class="grid" style="margin-top:16px">';
+ h+=books.map(b=>{
+  const approved=myApps.has(b.id), pending=myPend.has(b.id);
+  return '<div class="gl" style="display:flex;flex-direction:column"><img src="'+esc(b.cover||LOGO)+'" style="width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:10px"><h3 style="margin:10px 0 4px">'+esc(b.title)+'</h3><small class="mu" style="flex:1">'+esc(String(b.intro||'').slice(0,100))+'...</small><p style="margin:8px 0;font-size:.84rem"><b>অধ্যায়:</b> '+bn(b.total_ch)+'টি • <b>শেষ তারিখ:</b> '+esc(b.deadline||'নির্দিষ্ট নয়')+'</p><button class="btn '+(approved?'ok':pending?'gh':'go')+' w" data-a="jb_detail:'+b.id+'">'+(approved?'📖 অধ্যায়ে লিখুন':pending?'⏳ আবেদন পর্যালোচনাধীন':'✨ বিস্তারিত ও অংশগ্রহণ করুন')+'</button></div>';
+ }).join('')+'</div></div>';
+ return h;
+}
+
+async function jointBookDetailH(bookId){
+ const ex=await getJointExt();
+ const b=(ex.jointBooks||[]).find(x=>x.id===bookId);
+ if(!b)return '<div class="wrap"><p class="mu">বইটি পাওয়া যায়নি।</p><button class="btn gh" data-a="go:jointbooks">ফিরে যান</button></div>';
+ const uid=S.user?S.user.id:null;
+ const app=(ex.jointApps||[]).find(x=>x.book_id===bookId&&x.user_id===uid);
+ const isApproved=app&&app.status==='approved';
+ const isPending=app&&app.status==='pending';
+
+ let chapsHtml='';
+ if(isApproved){
+  const chs=b.chapters||[];
+  const userChs=(ex.jointChapters||[]).filter(x=>x.book_id===bookId&&x.user_id===uid);
+  const chMap=Object.fromEntries(userChs.map(x=>[x.chapter_idx,x]));
+  const stText={none:'লেখা জমা হয়নি',draft:'খসড়া সংরক্ষিত',submitted:'জমা দেওয়া হয়েছে',review:'অ্যাডমিন পর্যালোচনা করছেন',approved:'অনুমোদিত',revision:'সংশোধনের জন্য ফেরত'};
+  const stCls={none:'pending',draft:'pending',submitted:'approved',review:'approved',approved:'approved',revision:'rejected'};
+
+  chapsHtml='<div class="gl" style="margin-top:16px"><h3>📖 অধ্যায়সমূহ ও লেখা জমা দিন</h3><div class="f">';
+  chapsHtml+=chs.map((c,idx)=>{
+   const uc=chMap[idx]||{status:'none'};
+   return '<div class="row" style="align-items:center"><div style="flex:1"><b>অধ্যায় '+bn(idx+1)+': '+esc(c.name)+'</b><br><small class="mu">'+esc(c.note||'')+'</small><br><span class="st '+(stCls[uc.status]||'pending')+'">'+(stText[uc.status]||'লেখা জমা হয়নি')+'</span></div><button class="btn sm '+(uc.status==='approved'?'ok':'go')+'" data-a="jb_write:'+bookId+':'+idx+'">✍️ '+(uc.status==='none'?'লেখা শুরু করুন':'সম্পাদনা ও জমা দিন')+'</button></div>';
+  }).join('')+'</div></div>';
+ }
+
+ let h='<div class="wrap"><button class="btn sm gh" data-a="go:jointbooks">← যৌথ বই তালিকা</button><div class="gl" style="margin-top:14px;display:flex;gap:16px;flex-wrap:wrap"><img src="'+esc(b.cover||LOGO)+'" style="width:160px;aspect-ratio:2/3;object-fit:cover;border-radius:12px;flex:none"><div style="flex:1;min-width:260px"><span class="eyebrow dk">JOINT PUBLICATION</span><h2 style="margin:4px 0">'+esc(b.title)+'</h2>'+(b.en_title?'<small class="mu">'+esc(b.en_title)+'</small><br>':'')+'<p style="margin:8px 0">'+esc(b.intro)+'</p><p style="font-size:.9rem;margin:4px 0"><b>থিম/বিষয়:</b> '+esc(b.theme||'সাধারণ')+' • <b>সাহিত্যধারা:</b> '+esc(b.genre||'গল্প/উপন্যাস')+'</p><p style="font-size:.9rem;margin:4px 0"><b>মোট অধ্যায়:</b> '+bn(b.total_ch)+'টি • <b>সর্বোচ্চ অক্ষরসীমা:</b> '+bn(b.max_chars||4000)+'টি প্রতি অধ্যায়ে</p><p style="font-size:.9rem;margin:4px 0"><b>শেষ তারিখ:</b> '+esc(b.deadline||'নির্দিষ্ট নয়')+'</p>'+(b.rules?'<div class="note" style="margin-top:10px"><b>নিয়মাবলি ও শর্তাবলি:</b><br>'+esc(b.rules)+'</div>':'')+'</div></div>';
+
+ if(isApproved){
+  h+='<div class="msg" style="margin-top:16px">✅ আপনার অংশগ্রহণের আবেদন অনুমোদিত হয়েছে! নিচের তালিকা থেকে যেকোনো অধ্যায়ে ক্লিক করে লেখা জমা দিতে পারেন।</div>'+chapsHtml;
+ }else if(isPending){
+  h+='<div class="warn" style="margin-top:16px">⏳ আপনার অংশগ্রহণের আবেদনটি অ্যাডমিনের কাছে জমা আছে এবং পর্যালোচনার অপেক্ষায় রয়েছে। অনুমোদিত হলেই অধ্যায়গুলো দেখতে পাবেন।</div>';
+ }else{
+  h+='<div class="gl" style="text-align:center;margin-top:16px"><h3>যৌথ বইটিতে অংশগ্রহণ করুন</h3><p class="mu">নিচের বোতামে ক্লিক করে আপনার আবেদন জমা দিন।</p><button class="btn go" data-a="jb_apply_modal:'+b.id+'">✨ অংশগ্রহণ করুন (আবেদন ফর্ম)</button></div>';
+ }
+ h+='</div>';
+ return h;
+}
+
+function applyJointModal(bookId){
+ modal('<h3>যৌথ বইয়ে অংশগ্রহণের আবেদন</h3><div class="f"><label>আপনার পূর্ণ নাম *</label><input id="jpa_name" value="'+esc(S.prof&&S.prof.full_name||'')+'"><label>যোগাযোগ নম্বর *</label><input id="jpa_phone" inputmode="tel" value="'+esc(S.prof&&S.prof.phone||'')+'"><label>লেখকের পরিচিতি ও অভিজ্ঞতা *</label><textarea id="jpa_bio" rows="3" placeholder="আপনার লেখার অভিজ্ঞতা বা সংক্ষিপ্ত পরিচিতি লিখুন..."></textarea><label>আপনার লেখার ধরন বা সাহিত্যধারা</label><input id="jpa_genre" placeholder="যেমন: ছোটগল্প, রোমান্স, থ্রিলার"></div><button class="btn go w" data-a="jb_apply_submit:'+bookId+'">📤 আবেদন জমা দিন</button><p></p><button class="btn gh w" data-a="close">বাতিল</button>');
+}
+
+async function jointChapterWriteH(bookId, chIdx){
+ const ex=await getJointExt();
+ const b=(ex.jointBooks||[]).find(x=>x.id===bookId);
+ if(!b)return '<div class="wrap"><p class="mu">বই পাওয়া যায়নি।</p></div>';
+ const chs=b.chapters||[];
+ const ch=chs[chIdx]||{name:'অধ্যায় '+(chIdx+1)};
+ const uid=S.user?S.user.id:null;
+ const uc=(ex.jointChapters||[]).find(x=>x.book_id===bookId&&x.user_id===uid&&x.chapter_idx===+chIdx)||{body:'',status:'none'};
+ const maxCh=b.max_chars||4000;
+
+ return '<div class="wrap"><button class="btn sm gh" data-a="jb_detail:'+bookId+'">← বইয়ের বিস্তারিত</button><div class="gl" style="margin-top:14px"><span class="eyebrow dk">CHAPTER '+bn(+chIdx+1)+'</span><h2>অধ্যায় '+bn(+chIdx+1)+': '+esc(ch.name)+'</h2>'+(ch.note?'<p class="mu"><b>অ্যাডমিন নির্দেশনা:</b> '+esc(ch.note)+'</p>':'')+'<div class="f" style="margin-top:14px"><label>আপনার লেখা (এখানে লিখুন বা পেস্ট করুন)</label><textarea id="jch_body" rows="14" placeholder="আপনার লেখা এখানে শুরু করুন...">'+esc(uc.body||'')+'</textarea><div style="display:flex;justify-content:space-between;align-items:center;font-size:.85rem" class="mu"><span>সর্বোচ্চ অক্ষরসীমা: '+bn(maxCh)+'</span><span>স্ট্যাটাস: '+(uc.status==='submitted'?'জমা দেওয়া হয়েছে':uc.status==='approved'?'অনুমোদিত':'খসড়া')+'</span></div>'+(uc.admin_note?'<div class="warn" style="margin-top:8px"><b>অ্যাডমিনের সংশোধনী মতামত:</b> '+esc(uc.admin_note)+'</div>':'')+'</div><div class="r2" style="margin-top:12px"><button class="btn gh" data-a="jb_save_draft:'+bookId+':'+chIdx+'">💾 খসড়া সংরক্ষণ করুন</button><button class="btn rd" data-a="jb_submit_ch:'+bookId+':'+chIdx+'">📥 জমা দিন (লাল বোতাম)</button></div></div></div>';
+}
+
 bookModal=bornikaBookModal;
 authorModal=bornikaAuthorModal;
 
